@@ -1,11 +1,11 @@
-const express = require ('express');
+import express from 'express';
 const router = express.Router();
 
 /** CONTROLLERS */
-const authCtrl = require('../controllers/auth');
+import { login, register, logout } from '../controllers/auth';
 
 /** MODELS */
-const User = require('../models/user');
+import User from '../models/user';
 
 /** CONFIGS */
 const jwtConfig = {
@@ -17,14 +17,14 @@ const jwtConfig = {
 
 router.route('/login')
   /** POST /api/login - Login user */
-  .post(authCtrl.login);
+  .post(login);
 
 router.route('/register')
   /** POST /api/register - Register user */
-  .post(authCtrl.register);
+  .post(register);
 
 router.route('/logout')
   /** POST /api/logout - Logout user */
-  .post(authCtrl.logout);
+  .post(logout);
 
 module.exports = router;

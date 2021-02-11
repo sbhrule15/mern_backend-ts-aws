@@ -1,6 +1,6 @@
 import User from '../models/user';
 
-function load(req, res, next, id) {
+export function load(req, res, next, id) {
   console.log("In User Load");
   User.findById(id)
     .exec()
@@ -10,12 +10,12 @@ function load(req, res, next, id) {
     }, (e) => next(e));
 }
 
-function get(req, res) {
+export function get(req, res) {
   console.log("In User Get");
   return res.json(req.dbUser);
 }
 
-function create(req, res, next) {
+export function create(req, res, next) {
   console.log("In User Create");
   User.create({
       username: req.body.username,
@@ -26,7 +26,7 @@ function create(req, res, next) {
     }, (e) => next(e));
 }
 
-function update(req, res, next) {
+export function update(req, res, next) {
   console.log("In User Update");
   const user = req.dbUser;
   Object.assign(user, req.body);
@@ -36,7 +36,7 @@ function update(req, res, next) {
       (e) => next(e));
 }
 
-function list(req, res, next) {
+export function list(req, res, next) {
   console.log("In User List");
   const { limit = 50, skip = 0 } = req.query;
   User.find()
@@ -47,7 +47,7 @@ function list(req, res, next) {
       (e) => next(e));
 }
 
-function listPacks(req, res, next) {
+export function listPacks(req, res, next) {
   const { limit = 50, skip = 0 } = req.query;
   Pack.find({ author: req.user })
     .skip(skip)
@@ -57,7 +57,7 @@ function listPacks(req, res, next) {
       (e) => next(e));
 }
 
-function remove(req, res, next) {
+export function remove(req, res, next) {
   console.log("In User Remove");
   const user = req.dbUser;
   user.remove()
